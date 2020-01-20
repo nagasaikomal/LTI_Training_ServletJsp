@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+// logically similar to main method in java
+// this function will be called when the DOM has been created for this page
+
+$(function()
+		{
+		$("button").click(function(evt)
+			{
+			evt.preventDefault();
+			//alert("chala chala")
+			var pnrno=document.getElementById("pnrno").value;
+			//var pnrno= $("#pnrno").val();
+			//alert(pnrno);
+			var url="http://localhost:9090/RestDemo/app/pnr?pnrNo="+pnrno;
+			$.ajax({
+				url: url,
+				method: 'GET',
+				success : function(response)
+				{
+					//alert(JSON.stringify(response));
+					//alert(response.travelDate)
+					var elem1= $("<p>").text("travel date"+response.travelDate);
+					$("#result").append(elem1);
+				}
+			})
+		})
+})
+
+</script>
+
+
+</head>
+<body>
+<h2>Welcome to Breakmytrip.com</h2>
+<h3>Our Mission, Or Aim : No sutta abhiyaan</h3>
+
+<form>
+Enter PNR No: <input type="text" id="pnrno"/> <br>
+<button>Show Status</button>
+</form>
+<div id="result">
+</div>
+
+</body>
+</html>
